@@ -24,6 +24,17 @@ Please implement a function that tests whether a
 given natural number is a prime:
 fun isPrime(n0: int): bool
 *)
+fun is_num(n : int, currentDivisor : int) =
+    if currentDivisor <= n - 1 then
+        n mod currentDivisor = 0 orelse is_num(n, currentDivisor + 1)
+    else
+        false;
+
+fun isPrime(n0 : int) : bool =
+    if n0 = 2 then
+        true
+    else
+        not(is_num(n, 2));
 
 (* ****** ****** *)
 
@@ -33,6 +44,28 @@ Please implement a function that converts a given
 integer to a string that represents the integer:
 fun int2str(i0: int): string
 *)
+fun int2str(n:int) : string = 
+if n=0 
+then "0" 
+else if n =1 
+then "1" 
+else if n =2 
+then "2" 
+else if n =3 
+then "3" 
+else if n =4 
+then "4" 
+else if n =5 
+then "5" 
+else if n =6 
+then "6" 
+else if n =7
+ then "7" 
+else if n =8 
+then "8" 
+else if n =9 
+then "9" 
+else int2str(n div 10)^int2str(n mod 10);
 
 (* ****** ****** *)
 
@@ -52,7 +85,12 @@ Please implement a function that returns the reverse of
 a given string:
 fun stringrev(cs: string): string
 *)
+fun reverseAux(s:string, i:int) : string = 
+    if i = 1 then str(String.sub(s, 0)) 
+    else str(String.sub(s, i-1)) ^ reverseAux(s, i-1);
 
+fun stringrev(s:string) : string = 
+    reverseAux(s, size(s));
 (* ****** ****** *)
 
 (* end of [CS320-2023-Spring-assign00.sml] *)

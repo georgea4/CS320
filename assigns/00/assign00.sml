@@ -77,7 +77,20 @@ fun str2int(cs: string): int
 In particular, it is expected that str2int(int2str(x)) = x
 *)
 
-(* ****** ****** *)
+fun pow10(n)=
+  if n=0 then 1 else 10 * pow10(n-1);
+
+fun str2listneg (L,n) =
+  if null L then 0
+  else ~(ord(hd L)-48) * pow10(n) + str2listneg(tl L, n-1);
+
+fun str2list (L,n) =
+  if null L then 0
+  else if ord(hd L) = 126 then str2listneg(tl L, n-1)
+  else (ord(hd L)-48) * pow10(n) + str2list(tl L, n-1);
+
+fun str2int (string) =
+  str2list(explode(string), size(string) - 1);
 
 (*
 Assign00-05: 10 points
